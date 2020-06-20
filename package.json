@@ -1,0 +1,18 @@
+{
+  "name": "socket-io-chat",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "bryan667",
+  "license": "MIT",
+  "scripts": {
+    "start": "concurrently \"yarn start-client\" \"yarn start-server\"",
+    "start-client": "yarn --cwd ./client start",
+    "start-server": "yarn --cwd ./server start"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "concurrently": "^5.2.0"
+  }
+}
