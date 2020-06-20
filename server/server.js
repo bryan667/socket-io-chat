@@ -11,11 +11,18 @@ app.use(index);
 const server = http.createServer(app);
 const io = socketIo(server);
 
+const users = {};
+
 io.on("connection", (socket) => {
   console.log("New client connected");
 
-  socket.on("send-chat-message", (message) => {
-    socket.broadcast.emit("chat-message", message);
+  socket.on("send-chat-message", (msg) => {
+    io.sockets.emit("chat-message", { name: users[socket.id], msg });
+  });
+
+  socket.on("new-user-joined", (name) => {
+    users[socket.id] = name;
+    io.sockets.emit("user-connected", name);
   });
 
   socket.on("disconnect", () => {
